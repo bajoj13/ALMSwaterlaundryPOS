@@ -5,7 +5,7 @@
             <h1>Inventory</h1>
             <p class="dashboard-subtitle">Monitor materials used for laundry and water refill services.</p>
         </div>
-        <button class="primary-link" type="button">+ Add stock item</button>
+        <button class="primary-link" type="button"><span>+</span> Add stock item</button>
     </header>
 
     <section class="inventory-summary" aria-label="Inventory summary">

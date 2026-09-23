@@ -53,3 +53,44 @@ document.querySelector('#clear-order').addEventListener('click', () => { documen
 document.querySelector('#order-form').addEventListener('submit', (event) => { event.preventDefault(); if (!event.currentTarget.reportValidity()) return; const customer = document.querySelector('#customer-name').value; toast.textContent = `${activeService === 'laundry' ? 'Laundry' : 'Water'} order for ${customer} created and ready for receipt printing.`; toast.classList.add('show'); window.setTimeout(() => toast.classList.remove('show'), 3500); });
 updateSummary();
 }
+
+const themeKey = 'laundrypos-theme';
+const themeNames = { blue: 'Blue', light: 'Light', dark: 'Dark', green: 'Green', red: 'Red' };
+
+function applyTheme(theme) {
+
+	document.body.classList.remove('theme-blue', 'theme-light', 'theme-dark', 'theme-green', 'theme-red');
+
+	document.body.classList.add(`theme-${theme}`);
+
+	const selectedTheme = document.querySelector(`[data-theme-choice][value="${theme}"]`);
+
+	if (selectedTheme) {
+		selectedTheme.checked = true;
+	}
+
+	const status = document.querySelector('#theme-status');
+
+	if (status) {
+		status.textContent = `${themeNames[theme] || themeNames.blue} selected`;
+	}
+}
+
+function initializeTheme() {
+	const savedTheme = localStorage.getItem(themeKey) || 'blue';
+	const theme = themeNames[savedTheme] ? savedTheme : 'blue';
+
+	applyTheme(theme);
+	document.querySelectorAll('[data-theme-choice]').forEach((choice) => {
+		choice.addEventListener('change', () => {
+			localStorage.setItem(themeKey, choice.value);
+			applyTheme(choice.value);
+		});
+	});
+}
+
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initializeTheme);
+} else {
+	initializeTheme();
+}

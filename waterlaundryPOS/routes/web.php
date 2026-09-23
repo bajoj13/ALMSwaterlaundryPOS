@@ -33,4 +33,8 @@ Route::get('/reports', function () {
     return view('reports');
 })->middleware(['auth', 'admin'])->name('reports');
 
+Route::get('/settings', function () {
+    return view('settings');
+})->middleware(['auth', 'admin'])->name('settings');
+
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout')->middleware('auth');

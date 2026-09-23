@@ -1,71 +1,92 @@
 <x-app-shell title="Dashboard" active="dashboard">
     <header class="topbar dashboard-topbar">
         <div>
-            <p class="eyebrow">Saturday, September 20</p>
-            <h1>Good morning, {{ explode(' ', auth()->user()->name)[0] }}</h1>
-            <p class="dashboard-subtitle">Here is what is moving through ALMS today.</p>
+            <p class="eyebrow">{{ now()->format('l, F j, Y') }}</p>
+            <h1>Dashboard</h1>
+            <p class="dashboard-subtitle">Overview of today's laundry operations.</p>
         </div>
-        <a class="primary-link" href="{{ route('pos') }}">Create new order <span>→</span></a>
+        <a class="primary-link" href="{{ route('pos') }}"><span>+</span> New transaction</a>
     </header>
 
     <section class="stat-grid" aria-label="Today's key statistics">
-        <article class="stat-card revenue-card"><span class="stat-icon">₱</span>
-            <p>Today's sales</p><strong>Php 4,860</strong><small><b>+12.5%</b> from yesterday</small>
+        <article class="stat-card revenue-card"><span class="stat-icon">↗</span>
+            <p>Today's sales</p><strong>₱1,260.00</strong>
         </article>
-        <article class="stat-card"><span class="stat-icon">◫</span>
-            <p>Orders today</p><strong>28</strong><small>16 laundry · 12 water</small>
+        <article class="stat-card"><span class="stat-icon bag-icon">▣</span>
+            <p>Today's transactions</p><strong>4</strong>
         </article>
-        <article class="stat-card"><span class="stat-icon">◌</span>
-            <p>Orders in progress</p><strong>6</strong><small>2 ready for release</small>
+        <article class="stat-card"><span class="stat-icon pending-icon">◷</span>
+            <p>Pending laundry</p><strong>2</strong>
+        </article>
+        <article class="stat-card"><span class="stat-icon ready-icon">✓</span>
+            <p>Ready for pickup</p><strong>1</strong>
         </article>
         <article class="stat-card alert-card"><span class="stat-icon">!</span>
-            <p>Low stock items</p><strong>3</strong><small>Requires attention today</small>
+            <p>Low stock items</p><strong>2</strong>
         </article>
     </section>
 
-    <section class="dashboard-grid">
-        <article class="dashboard-panel sales-panel">
-            <div class="panel-heading">
-                <div>
-                    <p class="section-label">Sales overview</p>
-                    <h2>This week</h2>
-                </div><button type="button">Sep 15 - 20 ▾</button>
-            </div>
-            <div class="sales-value"><strong>Php 24,380</strong><span>+ 8.4%</span></div>
-            <div class="chart-wrap" aria-label="Weekly sales chart">
-                <div class="chart-labels"><span>Php 6k</span><span>Php 4k</span><span>Php 2k</span><span>Php 0</span>
-                </div>
-                <div class="bar-chart">
-                    <div style="--bar: 48%"><span>Mon</span></div>
-                    <div style="--bar: 66%"><span>Tue</span></div>
-                    <div style="--bar: 54%"><span>Wed</span></div>
-                    <div style="--bar: 76%"><span>Thu</span></div>
-                    <div style="--bar: 62%"><span>Fri</span></div>
-                    <div class="today-bar" style="--bar: 89%"><span>Sat</span></div>
-                </div>
-            </div>
-        </article>
-
-        <article class="dashboard-panel mix-panel">
-            <div class="panel-heading">
-                <div>
-                    <p class="section-label">Service mix</p>
-                    <h2>Today's orders</h2>
-                </div>
-            </div>
-            <div class="mix-display">
-                <div class="mix-ring"><strong>28</strong><span>orders</span></div>
-                <div class="mix-legend">
-                    <p><i class="laundry-dot"></i><span>Laundry</span><strong>16</strong></p>
-                    <p><i class="water-dot"></i><span>Water refill</span><strong>12</strong></p>
-                </div>
-            </div>
-            @if (auth()->user()->role === 'admin')
-                <a class="text-link" href="{{ route('reports') }}">Open sales report <span>→</span></a>
-            @else
-                <span class="text-link">Today's service mix</span>
-            @endif
-        </article>
+    <section class="dashboard-panel recent-transactions-panel">
+        <div class="panel-heading">
+            <h2>Recent transactions</h2>
+            <a class="text-link" href="{{ route('orders') }}">View all</a>
+        </div>
+        <div class="dashboard-table-wrap">
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Customer</th>
+                        <th>Service</th>
+                        <th>Total</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>TXN-1005</strong></td>
+                        <td>Maria Santos</td>
+                        <td>Wash &amp; Fold</td>
+                        <td><strong>₱400.00</strong></td>
+                        <td>Cash</td>
+                        <td><span class="status complete">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TXN-1004</strong></td>
+                        <td>Pedro Garcia</td>
+                        <td>Blanket</td>
+                        <td><strong>₱200.00</strong></td>
+                        <td>Cash</td>
+                        <td><span class="status queue">Received</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TXN-1003</strong></td>
+                        <td>Ana Cruz</td>
+                        <td>Comforter</td>
+                        <td><strong>₱450.00</strong></td>
+                        <td>Card</td>
+                        <td><span class="status ready">Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TXN-1002</strong></td>
+                        <td>Jose Reyes</td>
+                        <td>Wash, Dry &amp; Fold, Ironing</td>
+                        <td><strong>₱330.00</strong></td>
+                        <td>GCash</td>
+                        <td><span class="status washing">Processing</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TXN-1001</strong></td>
+                        <td>Maria Santos</td>
+                        <td>Wash &amp; Fold</td>
+                        <td><strong>₱280.00</strong></td>
+                        <td>Cash</td>
+                        <td><span class="status complete">Completed</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <section class="dashboard-grid lower-grid">

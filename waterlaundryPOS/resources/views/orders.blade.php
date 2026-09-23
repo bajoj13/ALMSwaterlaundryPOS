@@ -5,7 +5,7 @@
             <h1>All orders</h1>
             <p class="dashboard-subtitle">Track laundry and water refill orders from intake to release.</p>
         </div>
-        <a class="primary-link" href="{{ route('pos') }}">Create new order <span>→</span></a>
+        <a class="primary-link" href="{{ route('pos') }}"><span>+</span> New transaction</a>
     </header>
 
     <section class="orders-overview" aria-label="Order statistics">

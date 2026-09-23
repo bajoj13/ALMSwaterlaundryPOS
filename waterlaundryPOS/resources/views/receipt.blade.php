@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0b4fa3">
-    <title>Receipt #{{ $receipt['number'] }} | ALMS POS</title>
+    <title>Receipt #{{ $receipt['number'] }} | LaundryPOS</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|playfair-display:600,700" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -21,7 +21,7 @@
         <article class="receipt-paper">
             <header class="receipt-brand">
                 <span class="receipt-mark"><span></span></span>
-                <div><strong>ALMS</strong><small>Water Refilling Station + Laundry Shop</small></div>
+                <div><strong>LaundryPOS</strong><small>Water Refilling Station + Laundry Shop</small></div>
             </header>
             <div class="receipt-heading">
                 <div>
@@ -69,7 +69,8 @@
                     <dd>{{ $receipt['total'] }}</dd>
                 </div>
             </dl>
-            <footer class="receipt-footer"><strong>Thank you for choosing ALMS.</strong><span>Please keep this receipt
+            <footer class="receipt-footer"><strong>Thank you for choosing LaundryPOS.</strong><span>Please keep this
+                    receipt
                     for your records.</span><small>Blk 18, Lt 20, Mint St., Countryville, Cabantian, Davao City</small>
             </footer>
         </article>
