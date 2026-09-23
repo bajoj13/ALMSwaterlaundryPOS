@@ -14,7 +14,7 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 Route::get('/pos', function () {
-    return view('welcome');
+    return view('pos');
 })->middleware('auth')->name('pos');
 
 Route::get('/orders', function () {
